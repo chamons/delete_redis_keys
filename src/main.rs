@@ -31,9 +31,9 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-const CHUNK_SIZE: usize = 10;
+const CHUNK_SIZE: usize = 100;
 const PRINT_CHUNK_OFFSET: usize = 100;
-const REQUESTS_PER_SECOND: u32 = 10;
+const REQUESTS_PER_SECOND: u32 = 40;
 
 async fn delete_keys(redis: &str, file: &str, skip: usize) -> Result<(), eyre::Error> {
     let client = redis::Client::open(redis).expect("Unable to create redis client");
@@ -55,7 +55,7 @@ async fn delete_keys(redis: &str, file: &str, skip: usize) -> Result<(), eyre::E
         limiter.until_ready().await;
 
         // println!("{:?}", chunk);
-        conn.del::<&[String], ()>(&chunk)?;
+        conn.unlink::<&[String], ()>(&chunk)?;
         chunk_index += 1;
     }
 
