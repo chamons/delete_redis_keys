@@ -6,3 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+eyre = "0.6.12"
+flate2 = "1.0.28"
+governor = "0.6.3"
+itertools = "0.12.1"
+redis = "0.25.3"
+tokio = { version = "1.37.0", features = ["rt", "macros", "rt-multi-thread"] }
